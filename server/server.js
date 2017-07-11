@@ -16,25 +16,31 @@ io.on('connection',function(socket){
   socket.on('disconnect',function(req,res){
     console.log('Disconnected from client');
   });
-
-// socket.emit('arrived',{
+//
+// socket.emit('newMessage',{
 //   from:'baap',
 //   text:'hello'
 // });
-//
-// socket.on('reply',function(reply){
-//   console.log('reply',reply);
-// });
 
-
-socket.on('createEmail',function(newEmail){          //event listener    :recieve data from client and print to server/terminal
-  console.log('email',newEmail);
+socket.on('createMessage',function(reply){
+  console.log('reply',reply);
+  io.emit('newMessage',{
+    from:reply.from,
+    text:reply.text
+  });
 });
 
-  socket.emit('newEmail',{            //event creator   :send data to client and that will print that to clint terminal
-    text:'chitti aayi h',
-    ok:'ok'
-  });
+
+// socket.on('createEmail',function(newEmail){          //event listener    :recieve data from client and print to server/terminal
+//   console.log('email',newEmail);
+// });
+//
+//   socket.emit('newEmail',{            //event creator   :send data to client and that will print that to clint terminal
+//     text:'chitti aayi h',
+//     ok:'ok'
+//   });
+
+
 });
 
 server.listen(port,()=>{
