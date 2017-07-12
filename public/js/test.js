@@ -33,6 +33,8 @@ jQuery('#message-form').on('submit',function(e){
   })
 });
 
+
+
 var locationn = jQuery('#send-location');
 locationn.on('click',function(){
   if(!navigator.geolocation){
