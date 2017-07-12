@@ -7,7 +7,16 @@
 
 <body>
   <p>Welcome to nodejs chat app</p>
+
+<ol id="messages"></ol>
+
+<form id="message-form">
+  <input name="message" type="text" placeholder="Message"/>
+  <button>send</button>
+</form>
+
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/jquery-3.2.1.min.js"></script>
   <script src="/js/test.js"></script>
 </body>
 

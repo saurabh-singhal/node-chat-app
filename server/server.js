@@ -4,6 +4,8 @@ const publicPath = path.join(__dirname,'../public');
 const http  = require('http');
 const socketIO = require('socket.io');
 
+const {generateMessage} = require('./utils/message.js');
+
 const port = process.env.PORT||3000;
 var app = express();
 var server = http.createServer(app);
@@ -13,33 +15,24 @@ app.use(express.static(publicPath));
 io.on('connection',function(socket){
   console.log('new user connected');
 
-  socket.on('disconnect',function(req,res){
-    console.log('Disconnected from client');
-  });
-//
+  socket.emit('newMessage',generateMessage('admin','Welcome to chat app'));
+  socket.broadcast.emit('newMessage',generateMessage('admin','New user joined the group'));
+
 // socket.emit('newMessage',{
 //   from:'baap',
 //   text:'hello'
 // });
 
-socket.on('createMessage',function(reply){
+  socket.on('createMessage',function(reply,callback){
   console.log('reply',reply);
-  io.emit('newMessage',{
-    from:reply.from,
-    text:reply.text
+  io.emit('newMessage',generateMessage(reply.from,reply.text));
+  // socket.broadcast.emit('newMessage',generateMessage(reply.from,reply.text));
+  callback('okay');
   });
-});
 
-
-// socket.on('createEmail',function(newEmail){          //event listener    :recieve data from client and print to server/terminal
-//   console.log('email',newEmail);
-// });
-//
-//   socket.emit('newEmail',{            //event creator   :send data to client and that will print that to clint terminal
-//     text:'chitti aayi h',
-//     ok:'ok'
-//   });
-
+  socket.on('disconnect',function(req,res){
+    console.log('Disconnected from client');
+  });
 
 });
 
