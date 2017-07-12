@@ -21,8 +21,7 @@ io.on('connection',function(socket){
   socket.on('createMessage',function(reply,callback){
   console.log('reply',reply);
   io.emit('newMessage',generateMessage(reply.from,reply.text));
-  // socket.broadcast.emit('newMessage',generateMessage(reply.from,reply.text));
-  callback('okay');
+  callback();
   });
 
   socket.on('disconnect',function(req,res){
@@ -30,7 +29,7 @@ io.on('connection',function(socket){
   });
 
   socket.on('createLocation',function(location){
-    socket.emit('newLocation',generateLocation('Admin',location.longitude,location.latitude));
+    io.emit('newLocation',generateLocation('User',location.longitude,location.latitude));
   });
 
 });

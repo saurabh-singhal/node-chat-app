@@ -1,20 +1,29 @@
-<DOCTYPE !html>
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body>
-  <p>Welcome to nodejs chat app</p>
+<body class="chat">
 
-<ol id="messages"></ol>
+<div class="chat__sidebar">
+  <h3>People</h3>
+  <div id="users"></div>
+</div>
 
-<form id="message-form">
-  <input name="message" type="text" placeholder="Message"/>
-  <button>send</button>
-</form>
-<button id="send-location">Send Location</button>
+<div class="chat__main">
+  <ol id="messages" class="chat__messages"></ol>
+
+<div class="chat__footer">
+  <form id="message-form">
+    <input name="message" type="text" placeholder="Message" required=true autofocus autocomplete="off"/>
+    <button>send</button>
+  </form>
+  <button id="send-location">Send Location</button>
+</div>
+</div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/libs/jquery-3.2.1.min.js"></script>

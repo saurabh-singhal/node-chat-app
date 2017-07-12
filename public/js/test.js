@@ -5,7 +5,6 @@ socket.on('connect',function(){
 });
 
 socket.on('newLocation',function(location){
-  console.log('hello');
   var li = jQuery('<li></li>');
   var a = jQuery('<a target="_blank">My current location</a>');
   li.text(`${location.from}: `);
@@ -19,7 +18,6 @@ socket.on('disconnect',function(){
 });
 
 socket.on('newMessage',function(message){
-  console.log('message aaya h',message);
   var li = jQuery('<li></li>');
   li.text(`${message.from} : ${message.text}`);
   jQuery('#messages').append(li);
@@ -30,8 +28,8 @@ jQuery('#message-form').on('submit',function(e){
   socket.emit('createMessage',{
     from:'User',
     text:jQuery('[name=message]').val()
-  },function(data){
-    console.log('form se aa raha h message',data);
+  },function(){
+    jQuery('[name=message]').val('');
   })
 });
 
@@ -40,14 +38,17 @@ locationn.on('click',function(){
   if(!navigator.geolocation){
     return alert('location not supported');
   }
+  locationn.attr('disabled','disabled').text('Sending Location...');
   navigator.geolocation.getCurrentPosition(function(position)
   {
+    locationn.removeAttr('disabled').text('Send Location');
     socket.emit('createLocation',{
       longitude:position.coords.longitude,
       latitude:position.coords.latitude
     });
   console.log(position);
-  },function(error){
+},function(error){
+    locationn.removeAttr('disabled').text('Send Location');
     alert('unable');
     console.log(error);
   });
