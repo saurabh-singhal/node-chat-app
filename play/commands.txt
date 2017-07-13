@@ -1,0 +1,8 @@
+***********IN TERMINAL 1******
+cd /program files/mongodb/server/3.4/bin
+mongod.exe --dbpath /users/saurabh/mongo-data
+
+
+**********IN TERMINAL 2*****************
+cd /program files/mongodb/server/3.4/bin
+mongo.exe
