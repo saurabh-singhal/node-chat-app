@@ -18,6 +18,7 @@
 <div class="chat__main">
   <ol id="messages" class="chat__messages"></ol>
 
+<!--user input form(message box) with id='message-form'-->
 <div class="chat__footer">
   <form id="message-form">
     <input name="message" type="text" placeholder="Message" required=true autofocus autocomplete="off"/>
@@ -27,6 +28,9 @@
 </div>
 </div>
 
+
+<!--Display message on screen-->
+<!--Data coming from chat.js by rendering-->
 <script id="template-message" type="text/template">
   <li class="message">
     <div class="message__title">
@@ -39,6 +43,8 @@
   </li>
 </script>
 
+<!--Display Location on screen -->
+<!--Data coming from chat.js by rending -->
 <script id="location-template-message" type="text/template">
   <li class="message">
     <div class="message__title">
@@ -53,6 +59,7 @@
   </li>
 </script>
 
+<!--Importing javascript library on client side -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/libs/jquery-3.2.1.min.js"></script>
   <script src="/js/chat.js"></script>
